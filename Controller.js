@@ -10,25 +10,21 @@ class Controller {
   run() {
     const model = this.#model;
     const view = this.#view;
-    // отображаем ту страницу, на которой мы сейчас находимся
+
     switch (model.getPage()) {
       case 'select-topic': {
         model.importTopics();
         const topics = model.getTopics();
         const numTopic = view.renderSelectTopicPage(topics);
         const topic = model.chooseTopic(numTopic);
-
         model.importQuestions(topic);
-
         model.stopSelect();
-
-        //const topic = this.#view.renderSelectTopicPage(model.getTopics());
-        //model.chooseTopic(topic);
         return this.run();
       }
+
       case 'questions': {
-        const questions = model.getQuestions();
         let rightAnswers = 0;
+        const questions = model.getQuestions();
         questions.forEach(question => {
           let answer = view.renderCurrentQuestion(question);
           if (answer === question.answer) {
@@ -42,19 +38,21 @@ class Controller {
         model.stopQuestions();
         return this.run();
       }
+
       case 'results': {
         let rightAnswers = model.getRightAnswers();
         let questions = model.getQuestions();
         let result = Math.ceil(rightAnswers / questions.length * 100);
         view.renderResult(result);
+        view.renderRightAnswers(questions);
         model.stopQuiz();
-      }
-
-      case 'stop': {
-        console.log('The end!');
+        return this.run();
       }
       
-      // ...
+      case 'stop': {
+        console.log('The end!');
+        break;
+      }
     }
   }
 }
