@@ -28,7 +28,7 @@ class Model {
     let array = data.split('\n').filter(item => item !== '');
 
     for (let i = 0; i < array.length; i += 2) {
-      let object = {question : array[i], answer: array[i + 1]};
+      let object = {name : array[i], answer: array[i + 1]};
       this.#questions.push(object);
     }
 
