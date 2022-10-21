@@ -27,7 +27,7 @@ class Controller {
         const questions = model.getQuestions();
         questions.forEach(question => {
           let answer = view.renderCurrentQuestion(question);
-          if (answer === question.answer) {
+          if (answer.toLowerCase() === question.answer) {
             rightAnswers++;
             view.renderRight();
           } else {
