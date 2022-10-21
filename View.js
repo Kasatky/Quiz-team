@@ -1,4 +1,5 @@
 const readlineSync = require('readline-sync');
+const Model = require('./Model');
 
 class View {
   renderSelectTopicPage(themes) {
@@ -31,11 +32,8 @@ class View {
 
   renderResult(result) {
     console.log();
-    console.log(`Your final score is ${result}`);
+    console.log(`Your final score is ${result} / 100`);
   }
 }
-
-const view = new View();
-view.renderSelectTopicPage(['animal','car','space']);
 
 module.exports = View;
