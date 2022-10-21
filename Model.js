@@ -31,7 +31,14 @@ class Model {
       let object = {name : array[i], answer: array[i + 1]};
       this.#questions.push(object);
     }
+  }
 
+  setRightAnswers(result) {
+    this.#right = result;
+  }
+
+  getRightAnswers() {
+    return this.#right;
   }
   // Подумай какие данные будут нужны View, чтобы рендерить эти страницы.
   // Исходя из этих данных определись какие поля будет содержать модель.
@@ -40,16 +47,25 @@ class Model {
     return this.#page;
   }
 
-  chooseTopic(topic) {
+  chooseTopic(num) {
     // Тема выбрана, сделай необходимые изменения в модели (в т.ч. измени this.page).
     // Чтобы сделать эти изменения подумай какая следующая страница будет отображена
     // и какие данные нужны View, чтобы отрендерить эту страницу
     // ...
+    return this.#topics[num - 1];
+  }
+
+  stopSelect() {
+    this.#page = 'questions';
+  }
+
+  stopQuestions() {
+    this.#page = 'results';
+  }
+
+  stopQuiz() {
+    this.#page = 'stop';
   }
 }
-
-const model = new Model();
-model.importQuestions('otter_flashcard_data');
-console.log(model.getQuestions());
 
 module.exports = Model;
